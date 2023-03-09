@@ -14,6 +14,8 @@ https://apicrm.cybersoft.edu.vn/files/30-01-2023-10-45-20-baitap_js_buoi_7-8.pdf
 
 ## Link demo
 
+exercise.js.b9.cybersoft.academy.nguyenvanthanh.bc43.surge.sh
+
 ## Mô tả bài tập
 
 Cho người dùng nhập vào các số nguyên và lưu trữ trong mảng.
