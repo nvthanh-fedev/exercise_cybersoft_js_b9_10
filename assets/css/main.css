@@ -1,0 +1,106 @@
+.btn {
+  border-radius: 25px;
+}
+
+.sp-thongbao {
+  color: red;
+  margin-left: 2px;
+  display: none;
+}
+
+#SapXepGiam {
+  display: none;
+}
+
+#content {
+  width: 100%;
+  background: #74ebd5; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #acb6e5,
+    #74ebd5
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #acb6e5,
+    #74ebd5
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.myCardHeader,
+.myCardFooter {
+  background-color: transparent;
+}
+
+.styled-table {
+  border-collapse: collapse;
+  margin: opx;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: center;
+}
+.styled-table th,
+.styled-table td {
+  padding: 10px 6px;
+  line-height: 37px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
+}
+
+table {
+  table-layout: fixed;
+}
+
+thead th:nth-child(1) {
+  width: 13%;
+}
+
+thead th:nth-child(2) {
+  width: 12%;
+}
+
+thead th:nth-child(3) {
+  width: 18%;
+}
+
+thead th:nth-child(4) {
+  width: 10%;
+}
+
+thead th:nth-child(5) {
+  width: 10%;
+}
+
+thead th:nth-child(6) {
+  width: 10%;
+}
+
+thead th:nth-child(7) {
+  width: 10%;
+}
+
+thead th:nth-child(8) {
+  width: 6%;
+}
+
+thead th:nth-child(9) {
+  width: 6%;
+}
