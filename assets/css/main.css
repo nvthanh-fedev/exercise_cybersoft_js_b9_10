@@ -49,7 +49,7 @@
 .styled-table th,
 .styled-table td {
   padding: 10px 6px;
-  line-height: 37px;
+  vertical-align: inherit;
 }
 
 .styled-table tbody tr {
@@ -65,42 +65,73 @@
   color: #009879;
 }
 
+.table thead th {
+  vertical-align: inherit;
+}
+
+td,
+th {
+  white-space: nowrap;
+}
+
 table {
   table-layout: fixed;
+  overflow-x: auto;
 }
 
 thead th:nth-child(1) {
-  width: 13%;
+  width: 102px !important;
 }
 
 thead th:nth-child(2) {
-  width: 12%;
+  width: 200px !important;
 }
 
 thead th:nth-child(3) {
-  width: 18%;
+  width: 265px !important;
 }
 
 thead th:nth-child(4) {
-  width: 10%;
+  width: 90px !important;
 }
 
 thead th:nth-child(5) {
-  width: 10%;
+  width: 115px !important;
 }
 
 thead th:nth-child(6) {
-  width: 10%;
+  width: 100px !important;
 }
 
 thead th:nth-child(7) {
-  width: 10%;
+  width: 90px !important;
 }
 
 thead th:nth-child(8) {
-  width: 6%;
+  width: 10px !important;
 }
 
 thead th:nth-child(9) {
-  width: 6%;
+  width: 10px !important;
+}
+
+@media (min-width: 768px) {
+  table {
+    overflow-x: hidden;
+  }
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+/*Thêm content và style của các header khác (nếu có)*/
+
+@media (min-width: 768px) {
+  table {
+    overflow-x: hidden;
+  }
 }

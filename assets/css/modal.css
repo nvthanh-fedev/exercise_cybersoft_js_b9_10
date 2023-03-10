@@ -180,3 +180,18 @@ button:hover {
   margin: 100px auto;
 }
 
+/* hiển thị modal trên các thiết bị có kích thước lớn hơn hoặc bằng 768px */
+@media (min-width: 768px) {
+  .modal-dialog {
+    max-width: 750px; /* điều chỉnh kích thước modal */
+    margin: 30px auto; /* canh giữa modal */
+  }
+}
+
+/* hiển thị modal trên các thiết bị có kích thước nhỏ hơn 768px */
+@media (max-width: 767px) {
+  .modal-dialog {
+    max-width: 90%; /* điều chỉnh kích thước modal */
+    margin: 10% auto; /* canh giữa modal */
+  }
+}

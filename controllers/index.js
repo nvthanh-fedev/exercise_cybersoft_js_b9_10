@@ -1,5 +1,5 @@
 var mangNhanVien = [];
-for (var i = 1; i <= 5; i++) {
+for (var i = 1; i <= 10; i++) {
   var nhanVien = new NhanVien();
   nhanVien.tknv = 10000 + i;
   nhanVien.name = "Nguyen Van " + String.fromCharCode(64 + i);
@@ -99,6 +99,7 @@ function onlyRenderTable(arrNhanVien) {
     var nv = arrNhanVien[i];
 
     htmlString += `
+    <tbody>
         <tr>
             <td>${nv.tknv}</td>
             <td>${nv.name}</td>
@@ -116,6 +117,7 @@ function onlyRenderTable(arrNhanVien) {
                 </button>
             </td>
         </tr>
+      </tbody>
         `;
   }
 
