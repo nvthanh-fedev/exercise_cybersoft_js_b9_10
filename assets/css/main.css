@@ -135,3 +135,23 @@ table {
     overflow-x: hidden;
   }
 }
+
+#btnSapXep {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+#btnSapXep i {
+  opacity: 0.5; /* độ mờ */
+}
+
+#btnSapXep:hover i {
+  opacity: 1; /* tăng độ mờ khi di chuột vào button */
+}
+
+#btnSapXep:hover,
+#btnSapXep:focus {
+  outline: none;
+}

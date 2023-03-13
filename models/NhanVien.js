@@ -7,6 +7,8 @@ function NhanVien() {
   this.luongCB = "";
   this.chucVu = "";
   this.gioLam = "";
+
+  
 }
 
 NhanVien.prototype.tongLuong = function () {

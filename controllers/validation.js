@@ -14,12 +14,25 @@ function validation() {
   return false;
 }
 
+function kiemTraTknvTonTai(tknv) {
+  for (var i = 0; i < mangNhanVien.length; i++) {
+    if (tknv === +mangNhanVien[i].tknv) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 function validationTknv(idValue, idTb) {
-  var tknv = document.getElementById(idValue).value;
+  var tknv = +document.getElementById(idValue).value;
+  console.log("🚀 ~ file: validation.js:29 ~ validationTknv ~ tknv:", tknv);
   document.getElementById(idTb).classList.remove("d-block");
 
-  if (tknv.trim() === "") {
+  if (tknv == null || tknv == "") {
     return showError(idTb, "Tài khoản nhân viên không được để trống!");
+  } else if (kiemTraTknvTonTai(tknv)) {
+    return showError(idTb, "Tài khoản nhân viên đã tồn tại!");
   } else if (tknv.length < 4 || tknv.length > 6) {
     return showError(idTb, "Tài khoản nhân viên có 4 đến 6 ký tự!");
   }
@@ -75,15 +88,19 @@ function validationMatKhau(idValue, idTb) {
 }
 
 function validationLuongCb(idValue, idTb) {
-  var luongCB = document.getElementById(idValue).value;
+  var luongCB = +document.getElementById(idValue).value;
+  console.log(
+    "🚀 ~ file: validation.js:79 ~ validationLuongCb ~ luongCB:",
+    luongCB
+  );
+
+  console.log(typeof luongCB);
   document.getElementById(idTb).classList.remove("d-block");
 
-  regex = /^(1[0-9]{6}|20[0-9]{6})$/;
-
-  if (luongCB.trim() === "") {
+  if (luongCB == "" || luongCB == null) {
     console.log("luong cb sai 1");
     return showError(idTb, "Lương cơ bản của nhân viên không được để trống!");
-  } else if (!regex.test(luongCB)) {
+  } else if (luongCB < 1000000 || luongCB > 20000000) {
     return showError(
       idTb,
       "Lương cơ bản phải nằm trong khoảng từ 1 000 000 đến 20 000 000!"

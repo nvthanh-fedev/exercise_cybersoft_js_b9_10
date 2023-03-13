@@ -13,7 +13,6 @@
 
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
 
-
   <!-- JQuery UI -->
   <link rel="stylesheet" href="./assets/css/jquery-ui.min.css" />
 
@@ -27,6 +26,10 @@
 
   <link rel="stylesheet" type="text/css" href="./assets/css/main.css" />
 
+  <!-- icon logo -->
+  <link rel="icon"
+    href="./assets/img/kisspng-clerk-computer-icons-clip-art-clerk-5b20ba415e19a0.6115672115288714893854.jpg"
+    type="image/icon type" />
 </head>
 
 <body>
@@ -64,14 +67,16 @@
               </div>
             </div>
 
-            <div class="div-table" style="overflow-x:auto; text-align: center;">
+            <div class="div-table" style="overflow-x: auto; text-align: center">
               <table class="table table-bordered table-hover myTable styled-table">
                 <thead class="text-primary">
                   <tr>
                     <th class="nowrap">
-                      <span class="mr-1">Tài khoản</span>
-                      <i class="fa fa-arrow-up" id="SapXepTang"></i>
-                      <i class="fa fa-arrow-down" id="SapXepGiam"></i>
+                      <button id="btnSapXep">
+                        <span class="mr-1">Tài khoản</span>
+                        <i class="fa fa-arrow-up" id="SapXepTang"></i>
+                        <i class="fa fa-arrow-down" id="SapXepGiam"></i>
+                      </button>
                     </th>
                     <th>Họ và tên</th>
                     <th>Email</th>
@@ -86,7 +91,6 @@
                 <tbody id="tableDanhSach"></tbody>
               </table>
             </div>
-
           </div>
 
           <!-- Footer -->
