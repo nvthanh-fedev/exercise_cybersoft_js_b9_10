@@ -80,39 +80,39 @@ table {
 }
 
 thead th:nth-child(1) {
-  width: 102px !important;
+  width: 102px;
 }
 
 thead th:nth-child(2) {
-  width: 200px !important;
+  width: 200px;
 }
 
 thead th:nth-child(3) {
-  width: 265px !important;
+  width: 265px;
 }
 
 thead th:nth-child(4) {
-  width: 90px !important;
+  width: 90px;
 }
 
 thead th:nth-child(5) {
-  width: 115px !important;
+  width: 115px;
 }
 
 thead th:nth-child(6) {
-  width: 100px !important;
+  width: 100px;
 }
 
 thead th:nth-child(7) {
-  width: 90px !important;
+  width: 90px;
 }
 
 thead th:nth-child(8) {
-  width: 10px !important;
+  width: 10px;
 }
 
 thead th:nth-child(9) {
-  width: 10px !important;
+  width: 10px;
 }
 
 @media (min-width: 768px) {

@@ -24,6 +24,8 @@ function kiemTraTknvTonTai(tknv) {
   return false;
 }
 
+
+
 function validationTknv(idValue, idTb) {
   var tknv = +document.getElementById(idValue).value;
   console.log("🚀 ~ file: validation.js:29 ~ validationTknv ~ tknv:", tknv);

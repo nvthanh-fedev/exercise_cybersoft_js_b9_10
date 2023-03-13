@@ -1,7 +1,7 @@
 var sapXepMangTheoTknvGiamDan = false;
 
 var mangNhanVien = [];
-for (var i = 1; i <= 5; i++) {
+for (var i = 1; i <= 10; i++) {
   var nhanVien = new NhanVien();
 
   nhanVien.tknv = 10000 + i;
@@ -345,3 +345,32 @@ document.getElementById("btnSapXep").onclick = function () {
     sapXepMangTheoTknvGiamDan = true;
   }
 };
+
+// hàm reset
+
+function reset() {
+  console.log("🚀 ~ file: index.js:364 ~ reset ~ reset():", "reset");
+  // Lấy ra modal theo id
+  const myModal = document.querySelector("#myModal");
+  myModal.addEventListener("hidden.bs.modal", function (event) {
+    console.log('Modal with id "myModalForm" has been hidden');
+    document.getElementById("tknv").innerHTML = "";
+    document.getElementById("name").innerHTML = "";
+    document.getElementById("email").innerHTML = "";
+    document.getElementById("password").innerHTML = "";
+    document.getElementById("datepicker").innerHTML = "";
+    document.getElementById("luongCB").innerHTML = "";
+    document.getElementById("chucvu").selectedIndex = 0;
+    document.getElementById("gioLam").innerHTML = "";
+
+    // Xóa các thông báo lỗi đã được hiển thị
+    var errorSpans = document.querySelectorAll(".sp-thongbao");
+    for (var i = 0; i < errorSpans.length; i++) {
+      errorSpans[i].innerHTML = "";
+    }
+  });
+}
+
+document.getElementById("btnDong").addEventListener("click", function () {
+  reset();
+});
