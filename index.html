@@ -30,6 +30,9 @@
   <link rel="icon"
     href="./assets/img/kisspng-clerk-computer-icons-clip-art-clerk-5b20ba415e19a0.6115672115288714893854.jpg"
     type="image/icon type" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
 </head>
 
 <body>
@@ -105,7 +108,7 @@
   </div>
 
   <!-- The Modal -->
-  <div class="modal fade" id="myModal" aria-hidden="true" data-bs-keyboard="false" data-bs-backdrop="static">
+  <div class="modal fade" id="myModal" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">
         <header class="head-form mb-0">
@@ -162,10 +165,10 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                 </div>
-                <input id="datepicker" type="date" name="html5date" class="form-control input-sm" type="text"
-                  placeholder="Select date" /><br />
+                <input type="text" class="form-control datepicker" id="datepicker" name="datepicker"
+                  placeholder="mm/dd/yyyy"><br />
               </div>
-              <span class="sp-thongbao" id="tbNgay"></span>
+              <span class="sp-thongbao" id="tb-ngay"></span>
             </div>
 
             <div class="form-group">
@@ -211,7 +214,7 @@
           <button id="btnCapNhat" type="button" class="btn btn-success">
             Cập nhật
           </button>
-          <button id="btnDong" type="button" class="btn btn-danger" data-dismiss="modal">
+          <button id="btnDong" type="button" class="btn btn-danger" data-dismiss="modal" onClick="resetForm()">
             Đóng
           </button>
         </div>

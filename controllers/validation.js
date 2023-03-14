@@ -6,7 +6,7 @@ function validation() {
   valid = valid & validationMatKhau("password", "tbMatKhau");
   valid = valid & validationLuongCb("luongCB", "tbLuongCB");
   valid = valid & validationGioLam("gioLam", "tbGiolam");
-  valid = valid & validationNgay("datepicker", "tbNgay");
+  valid = valid & validationNgay();
 
   if (valid) {
     return true;
@@ -22,7 +22,7 @@ function validationCapNhat() {
   valid = valid & validationMatKhau("password", "tbMatKhau");
   valid = valid & validationLuongCb("luongCB", "tbLuongCB");
   valid = valid & validationGioLam("gioLam", "tbGiolam");
-  valid = valid & validationNgay("datepicker", "tbNgay");
+  valid = valid & validationNgay();
 
   if (valid) {
     return true;
@@ -145,15 +145,18 @@ function validationGioLam(idValue, idTb) {
   return true;
 }
 
-function validationNgay(idValue, idTb) {
-  var date = document.getElementById(idValue).value;
-  document.getElementById(idTb).classList.remove("d-block");
+function validationNgay() {
+  // Get the selected date value
+  var date = document.getElementById("datepicker").value;
+  document.getElementById("tb-ngay").classList.remove("d-block");
 
-  if (date.trim() === "") {
-    return showError(idTb, `Ngày vào làm không được để trống!`);
+  // Chạy vòng lặp thông qua từng định dạng ngày tháng để xác nhận tính hợp lệ.
+  if (moment(date, "MM/DD/YYYY", true).isValid()) {
+    return true;
   }
 
-  return true;
+  // Trả về false nếu không hợp lệ.
+  return showError("tb-ngay", "Sai định dạng MM/DD/YYYY!");
 }
 
 function dayToString(date) {

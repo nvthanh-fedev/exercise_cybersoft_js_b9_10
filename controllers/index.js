@@ -1,20 +1,22 @@
 var sapXepMangTheoTknvGiamDan = false;
 
 var mangNhanVien = [];
-for (var i = 1; i <= 2; i++) {
+for (var i = 1; i <= 10; i++) {
   var nhanVien = new NhanVien();
 
   nhanVien.tknv = 10000 + i;
   nhanVien.name = "Nguyen Van " + String.fromCharCode(64 + i);
   nhanVien.email = "nguyenvan" + String.fromCharCode(64 + i) + "@gmail.com";
   nhanVien.password = "Nvt@123";
-  nhanVien.ngayLam = randomDayInThePast();
+  nhanVien.ngayLam = randomPastDate();
   nhanVien.luongCB = getRandomInt(1000000, 20000000);
   nhanVien.chucVu = randomChucVu();
   nhanVien.gioLam = Math.floor(Math.random() * (200 - 80 + 1)) + 80;
   nhanVien.tongLuong = nhanVien.tongLuong();
   nhanVien.xepLoai = nhanVien.xepLoai();
   mangNhanVien.push(nhanVien);
+
+  renderTableVaLuuLocal(mangNhanVien);
 }
 
 function getRandomInt(min, max) {
@@ -23,20 +25,12 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * ((max - min) / 100000 + 1)) * 100000 + min;
 }
 
-function randomDayInThePast() {
-  var today = new Date();
-  var daysAgo = Math.floor(Math.random() * 365) + 1; // random từ 1 đến 365 ngày
-  var pastDate = new Date(today.getTime() - daysAgo * 24 * 60 * 60 * 1000);
-  var formattedDate =
-    pastDate.getFullYear() +
-    "/" +
-    (pastDate.getMonth() + 1) +
-    "/" +
-    pastDate.getDate();
-
-  console.log(formattedDate); // ví dụ: 2022/01/15
-
-  return formattedDate;
+function randomPastDate() {
+  const currentDate = moment(); // Lấy thời gian hiện tại.
+  const randomPastDays = Math.floor(Math.random() * 365); // Sinh số ngày ngẫu nhiên trong quá khứ từ 0 đến 365.
+  const pastDate = currentDate.subtract(randomPastDays, "days"); // Trừ số ngày ngẫu nhiên từ thời gian hiện tại.
+  const formattedDate = pastDate.format("MM/DD/YYYY"); // Định dạng ngày tháng kết quả theo định dạng MM/DD/YYYY.
+  return formattedDate; // Trả về giá trị đã được định dạng.
 }
 
 // Sử dụng hàm để lấy một số nguyên ngẫu nhiên trong khoảng từ 1,000,000 đến 20,000,000 có bước nhảy là 100,000
@@ -71,6 +65,7 @@ document.querySelector("#btnThemNV").onclick = function () {
   nv.email = document.getElementById("email").value;
   nv.luongCB = document.getElementById("luongCB").value;
   nv.chucVu = document.getElementById("chucvu").value;
+  nv.password = document.getElementById("password").value;
   nv.ngayLam = document.getElementById("datepicker").value;
   console.log("🚀 ~ file: index.js:86 ~ nv.ngayLam:", nv.ngayLam);
 
@@ -106,7 +101,7 @@ function onlyRenderTable(arrNhanVien) {
             <td>${nv.tknv}</td>
             <td>${nv.name}</td>
             <td>${nv.email}</td>
-            <td>${nv.ngayLam}</td>
+            <td>${convertDateFormat(nv.ngayLam)}</td>
             <td>${nv.chucVu}</td>
             <td>${nv.tongLuong}</td>
             <td>${nv.xepLoai}</td>
@@ -114,7 +109,9 @@ function onlyRenderTable(arrNhanVien) {
                 <button class="btn btn-danger"  onclick="xoaNhanVien('${i}')"><i class="fa fa-trash"></i></button>
             </td>
             <td>
-                <button class="btn btn-warning" data-toggle="modal" data-target="#myModal"  onclick="layThongTin('${nv.tknv}')">
+                <button class="btn btn-warning" data-toggle="modal" data-target="#myModal"  onclick="layThongTin('${
+                  nv.tknv
+                }')">
                   <i class="fa fa-cog"></i>
                 </button>
             </td>
@@ -126,13 +123,6 @@ function onlyRenderTable(arrNhanVien) {
   getEleByQuery("#tableDanhSach").innerHTML = htmlString;
 
   return htmlString;
-}
-
-function capNhatNhanVien(tknv) {
-  console.log(
-    "🚀 ~ file: index.js:136 ~ capNhatNhanVien ~ capNhatNhanVien (tknv):"
-  );
-  console.log(tknv);
 }
 
 function luuLocalStorage() {
@@ -163,21 +153,26 @@ function xoaNhanVien(indexDel) {
 }
 
 function layThongTin(tknvClick) {
+  console.log("🚀 ~ file: index.js:161 ~ layThongTin ~ tknvClick:", tknvClick);
   document.getElementById("tknv").disabled = true;
   document.getElementById("btnThemNV").disabled = true;
   document.getElementById("btnCapNhat").disabled = false;
 
   for (var i = 0; i < mangNhanVien.length; i++) {
-    if (mangNhanVien[i].tknv === parseInt(tknvClick)) {
+    if (+mangNhanVien[i].tknv === parseInt(tknvClick)) {
       //in thông tin sinh viên tìm thấy lên giao diện
       document.querySelector("#tknv").value = mangNhanVien[i].tknv;
       document.querySelector("#name").value = mangNhanVien[i].name;
       document.querySelector("#email").value = mangNhanVien[i].email;
       document.querySelector("#password").value = mangNhanVien[i].password;
+      console.log(
+        "🚀 ~ file: index.js:173 ~ layThongTin ~ mangNhanVien[i].password:",
+        mangNhanVien[i].password
+      );
       document.querySelector("#luongCB").value = mangNhanVien[i].luongCB;
       document.querySelector("#chucvu").value = mangNhanVien[i].chucVu;
       document.querySelector("#gioLam").value = mangNhanVien[i].gioLam;
-      document.querySelector("#datepicker").value = mangNhanVien[i].datepicker;
+      document.querySelector("#datepicker").value = mangNhanVien[i].ngayLam;
       console.log(
         "🚀 ~ file: index.js:170 ~ layThongTin ~ mangNhanVien[i].ngayLam:",
         mangNhanVien[i].ngayLam
@@ -244,6 +239,7 @@ document.getElementById("btnCapNhat").onclick = function () {
   nvEdit.tknv = +document.getElementById("tknv").value;
   nvEdit.name = document.getElementById("name").value;
   nvEdit.email = document.getElementById("email").value;
+  nvEdit.password = document.getElementById("password").value;
   nvEdit.luongCB = document.getElementById("luongCB").value;
   nvEdit.chucVu = document.getElementById("chucvu").value;
   nvEdit.ngayLam = document.getElementById("datepicker").value;
@@ -251,10 +247,13 @@ document.getElementById("btnCapNhat").onclick = function () {
   nvEdit.tongLuong = nvEdit.tongLuong();
   nvEdit.xepLoai = nvEdit.xepLoai();
 
+  console.log("🚀 ~ file: index.js:238 ~ nvEdit:", nvEdit);
+
   for (var index = 0; index < mangNhanVien.length; index++) {
-    if (mangNhanVien[index].tknv === nvEdit.tknv) {
+    if (+mangNhanVien[index].tknv === +nvEdit.tknv) {
       //Tìm thấy object sinh viên trong mảng => gán các giá trị của object trong mảng = object edit
       mangNhanVien[index].name = nvEdit.name;
+      mangNhanVien[index].password = nvEdit.password;
       mangNhanVien[index].email = nvEdit.email;
       mangNhanVien[index].luongCB = nvEdit.luongCB;
       mangNhanVien[index].chucVu = nvEdit.chucVu;
@@ -311,25 +310,32 @@ document.getElementById("btnSapXep").onclick = function () {
   }
 };
 
-// hàm reset
-
-function reset() {
-  document.getElementById("tknv").innerHTML = "";
-  document.getElementById("name").innerHTML = "";
-  document.getElementById("email").innerHTML = "";
-  document.getElementById("password").innerHTML = "";
-  document.getElementById("datepicker").innerHTML = "";
-  document.getElementById("luongCB").innerHTML = "";
-  document.getElementById("chucvu").selectedIndex = 0;
-  document.getElementById("gioLam").innerHTML = "";
-
-  // Xóa các thông báo lỗi đã được hiển thị
-  var errorSpans = document.querySelectorAll(".sp-thongbao");
-  for (var i = 0; i < errorSpans.length; i++) {
-    errorSpans[i].innerHTML = "";
-  }
+function resetForm() {
+  document.getElementById("myForm").reset();
 }
 
-document.getElementById("btnDong").addEventListener("click", function () {
-  reset();
-});
+function convertDateFormat(dateString) {
+  // Định dạng ngày tháng ban đầu (điều chỉnh lại sau).
+  const dateFormat = [
+    "DD-MM-YYYY", //dd-mm-yyyy
+    "MM-DD-YYYY", //mm-dd-yyyy
+    "YYYY-MM-DD", //yyyy-mm-dd
+    "YYYY-DD-MM", //yyyy-dd-mm
+    "DD/MM/YYYY", //dd/mm/yyyy
+    "MM/DD/YYYY", //mm/dd/yyyy
+    "YYYY/MM/DD", //yyyy/mm/dd
+    "YYYY/DD/MM", //yyyy/dd/mm
+  ];
+
+  // Chạy vòng lặp thông qua từng định dạng ngày tháng để chuyển đổi giá trị.
+  for (let i = 0; i < dateFormat.length; i++) {
+    const dateObject = moment(dateString, dateFormat[i], true);
+    // Kiểm tra nếu giá trị đã chuyển đổi thành công.
+    if (dateObject.isValid()) {
+      return dateObject.format("MM/DD/YYYY"); // Trả về định dạng MM/DD/YYYY.
+    }
+  }
+
+  // Trả về null nếu không chuyển đổi được.
+  return null;
+}
