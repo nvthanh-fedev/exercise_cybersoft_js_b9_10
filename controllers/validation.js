@@ -42,7 +42,6 @@ function kiemTraTknvTonTai(tknv) {
 
 function validationTknv(idValue, idTb) {
   var tknv = +document.getElementById(idValue).value;
-  console.log("🚀 ~ file: validation.js:29 ~ validationTknv ~ tknv:", tknv);
   document.getElementById(idTb).classList.remove("d-block");
 
   if (tknv == null || tknv == "") {
@@ -57,7 +56,6 @@ function validationTknv(idValue, idTb) {
 
 function validationTknvRongVaChieuDai(idValue, idTb) {
   var tknv = +document.getElementById(idValue).value;
-  console.log("🚀 ~ file: validation.js:29 ~ validationTknv ~ tknv:", tknv);
   document.getElementById(idTb).classList.remove("d-block");
 
   if (tknv == null || tknv == "") {
@@ -118,16 +116,10 @@ function validationMatKhau(idValue, idTb) {
 
 function validationLuongCb(idValue, idTb) {
   var luongCB = +document.getElementById(idValue).value;
-  console.log(
-    "🚀 ~ file: validation.js:79 ~ validationLuongCb ~ luongCB:",
-    luongCB
-  );
 
-  console.log(typeof luongCB);
   document.getElementById(idTb).classList.remove("d-block");
 
   if (luongCB == "" || luongCB == null) {
-    console.log("luong cb sai 1");
     return showError(idTb, "Lương cơ bản của nhân viên không được để trống!");
   } else if (luongCB < 1000000 || luongCB > 20000000) {
     return showError(

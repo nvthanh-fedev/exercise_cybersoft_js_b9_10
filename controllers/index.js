@@ -14,9 +14,6 @@ for (var i = 1; i <= 2; i++) {
   nhanVien.gioLam = Math.floor(Math.random() * (200 - 80 + 1)) + 80;
   nhanVien.tongLuong = nhanVien.tongLuong();
   nhanVien.xepLoai = nhanVien.xepLoai();
-
-  console.log("🚀 ~ file: index.js:4 ~ nhanVien:", nhanVien);
-
   mangNhanVien.push(nhanVien);
 }
 
@@ -45,9 +42,6 @@ function randomDayInThePast() {
 // Sử dụng hàm để lấy một số nguyên ngẫu nhiên trong khoảng từ 1,000,000 đến 20,000,000 có bước nhảy là 100,000
 var randomInt = getRandomInt(1000000, 20000000);
 
-// In ra số nguyên ngẫu nhiên
-console.log(randomInt);
-
 function randomChucVu() {
   var random = Math.random();
   var result =
@@ -58,22 +52,12 @@ function randomChucVu() {
 
 renderTableVaLuuLocal(mangNhanVien);
 
-// In mảng nhân viên ra để kiểm tra
-// console.log(mangNhanVien);
-
-// Tiếp tục tạo các đối tượng nhân viên khác và thêm vào mảng tương tự
-// ...
-
-// In mảng nhân viên ra để kiểm tra
-// console.log(mangNhanVien);
-
 function getEleByQuery(n) {
   return document.querySelector(n);
 }
 
 document.querySelector("#btnThemNV").onclick = function () {
   var check = validation();
-  console.log("🚀 ~ file: index.js:13 ~ check:", check);
 
   if (!check) {
     return;
@@ -109,15 +93,6 @@ function renderTableVaLuuLocal(arrNhanVien) {
   onlyRenderTable(arrNhanVien);
   luuLocalStorage();
 }
-
-// function dinhDangNgayThangNam(stringDate) {
-//   const [year, month, day] = stringDate.split("-");
-//   console.log(month);
-//   console.log(day);
-//   console.log(year);
-
-//   return month + "/" + day + "/" + year;
-// }
 
 function onlyRenderTable(arrNhanVien) {
   var htmlString = "";
@@ -202,9 +177,7 @@ function layThongTin(tknvClick) {
       document.querySelector("#luongCB").value = mangNhanVien[i].luongCB;
       document.querySelector("#chucvu").value = mangNhanVien[i].chucVu;
       document.querySelector("#gioLam").value = mangNhanVien[i].gioLam;
-      document.querySelector("#datepicker").value = convertStringToDate(
-        mangNhanVien[i].ngayLam
-      );
+      document.querySelector("#datepicker").value = mangNhanVien[i].datepicker;
       console.log(
         "🚀 ~ file: index.js:170 ~ layThongTin ~ mangNhanVien[i].ngayLam:",
         mangNhanVien[i].ngayLam
@@ -262,8 +235,6 @@ function stringToSlug(title) {
 
 document.getElementById("btnCapNhat").onclick = function () {
   var check = validationCapNhat();
-  console.log("🚀 ~ file: index.js:13 ~ check:", check);
-
   if (!check) {
     return;
   }
@@ -330,12 +301,10 @@ function bubbleSortNvGiamDan(arr) {
 
 document.getElementById("btnSapXep").onclick = function () {
   if (sapXepMangTheoTknvGiamDan) {
-    console.log("🚀 tang dan", mangNhanVien);
     bubbleSortNvTangDan(mangNhanVien);
     onlyRenderTable(mangNhanVien);
     sapXepMangTheoTknvGiamDan = false;
   } else {
-    console.log("🚀 giam dan", mangNhanVien);
     bubbleSortNvGiamDan(mangNhanVien);
     onlyRenderTable(mangNhanVien);
     sapXepMangTheoTknvGiamDan = true;
@@ -345,8 +314,6 @@ document.getElementById("btnSapXep").onclick = function () {
 // hàm reset
 
 function reset() {
-  console.log("🚀 ~ file: index.js:364 ~ reset ~ reset():", "reset");
-  console.log('Modal with id "myModalForm" has been hidden');
   document.getElementById("tknv").innerHTML = "";
   document.getElementById("name").innerHTML = "";
   document.getElementById("email").innerHTML = "";
