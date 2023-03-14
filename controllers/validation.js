@@ -44,12 +44,14 @@ function validationTknv(idValue, idTb) {
   var tknv = +document.getElementById(idValue).value;
   document.getElementById(idTb).classList.remove("d-block");
 
+  var regex = /^\d{4,6}$/;
+
   if (tknv == null || tknv == "") {
     return showError(idTb, "Tài khoản nhân viên không được để trống!");
   } else if (kiemTraTknvTonTai(tknv)) {
     return showError(idTb, "Tài khoản nhân viên đã tồn tại!");
-  } else if (tknv.length < 4 || tknv.length > 6) {
-    return showError(idTb, "Tài khoản nhân viên có 4 đến 6 ký tự!");
+  } else if (!regex.test(tknv)) {
+    return showError(idTb, "Tài khoản nhân viên có 4 đến 6 ký số!");
   }
   return true;
 }
@@ -85,7 +87,7 @@ function validationEmail(idValue, idTb) {
   document.getElementById(idTb).classList.remove("d-block");
 
   var validRegex =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
   if (email.trim() === "") {
     return showError(idTb, "Email nhân viên không được để trống!");
@@ -117,10 +119,14 @@ function validationMatKhau(idValue, idTb) {
 function validationLuongCb(idValue, idTb) {
   var luongCB = +document.getElementById(idValue).value;
 
+  var regexNumber = /^[0-9]+$/;
+
   document.getElementById(idTb).classList.remove("d-block");
 
   if (luongCB == "" || luongCB == null) {
     return showError(idTb, "Lương cơ bản của nhân viên không được để trống!");
+  } else if (!regexNumber.test(luongCB)) {
+    return showError(idTb, "Lương cơ bản sai định dạng số!");
   } else if (luongCB < 1000000 || luongCB > 20000000) {
     return showError(
       idTb,
@@ -135,13 +141,14 @@ function validationGioLam(idValue, idTb) {
   var gioLam = document.getElementById(idValue).value;
   document.getElementById(idTb).classList.remove("d-block");
 
-  regex = /^(8[0-9]|9[0-9]|1[0-9]{2}|200)$/;
+  regex = /^[0-9.]+$/;
 
   if (gioLam.trim() === "") {
     return showError(idTb, "Giờ làm của nhân viên không được để trống!");
   } else if (!regex.test(gioLam)) {
+    return showError(idTb, "Giờ làm không đúng định dạng!");
+  } else if (gioLam < 80 || gioLam > 200)
     return showError(idTb, "Giờ làm phải nằm trong khoảng 80 - 200 giờ!");
-  }
   return true;
 }
 

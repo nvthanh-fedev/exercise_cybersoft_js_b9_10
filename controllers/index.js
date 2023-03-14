@@ -163,6 +163,10 @@ function layThongTin(tknvClick) {
       //in thông tin sinh viên tìm thấy lên giao diện
       document.querySelector("#tknv").value = mangNhanVien[i].tknv;
       document.querySelector("#name").value = mangNhanVien[i].name;
+      console.log(
+        "🚀 ~ file: index.js:166 ~ layThongTin ~ mangNhanVien[i].name:",
+        mangNhanVien[i].name
+      );
       document.querySelector("#email").value = mangNhanVien[i].email;
       document.querySelector("#password").value = mangNhanVien[i].password;
       console.log(
@@ -195,37 +199,6 @@ function convertStringToDate(string) {
   console.log(date); // Kết quả: Sun Mar 12 2023 00:00:00 GMT+0700 (Indochina Time)
 
   return date;
-}
-
-function stringToSlug(title) {
-  //Đổi chữ hoa thành chữ thường
-  slug = title.toLowerCase();
-
-  //Đổi ký tự có dấu thành không dấu
-  slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, "a");
-  slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, "e");
-  slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, "i");
-  slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, "o");
-  slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, "u");
-  slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, "y");
-  slug = slug.replace(/đ/gi, "d");
-  //Xóa các ký tự đặt biệt
-  slug = slug.replace(
-    /\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi,
-    ""
-  );
-  //Đổi khoảng trắng thành ký tự gạch ngang
-  slug = slug.replace(/ /gi, "-");
-  //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
-  //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
-  slug = slug.replace(/\-\-\-\-\-/gi, "-");
-  slug = slug.replace(/\-\-\-\-/gi, "-");
-  slug = slug.replace(/\-\-\-/gi, "-");
-  slug = slug.replace(/\-\-/gi, "-");
-  //Xóa các ký tự gạch ngang ở đầu và cuối
-  slug = "@" + slug + "@";
-  slug = slug.replace(/\@\-|\-\@|\@/gi, "");
-  return slug;
 }
 
 document.getElementById("btnCapNhat").onclick = function () {
@@ -311,8 +284,33 @@ document.getElementById("btnSapXep").onclick = function () {
 };
 
 function resetForm() {
-  document.getElementById("myForm").reset();
+  // Lấy thông tin form
+  const form = document.querySelector("#myForm");
+
+  console.log("reset");
+
+  // Thiết lập lại giá trị của các input
+
+  var inputs = document.querySelectorAll("#myForm .form-control");
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].value = "";
+  }
+
+  var tbs = document.querySelectorAll("#myForm .sp-thongbao");
+  for (var i = 0; i < tbs.length; i++) {
+    tbs[i].innerHTML = "";
+  }
+
+  form.reset();
 }
+
+document.getElementById("btnDong").onclick = function () {
+  resetForm();
+};
+
+// Gán sự kiện hidden cho modal
+const myModal = document.querySelector("#myModal");
+myModal.addEventListener("hidden.bs.modal", resetForm());
 
 function convertDateFormat(dateString) {
   // Định dạng ngày tháng ban đầu (điều chỉnh lại sau).
@@ -330,12 +328,72 @@ function convertDateFormat(dateString) {
   // Chạy vòng lặp thông qua từng định dạng ngày tháng để chuyển đổi giá trị.
   for (let i = 0; i < dateFormat.length; i++) {
     const dateObject = moment(dateString, dateFormat[i], true);
-    // Kiểm tra nếu giá trị đã chuyển đổi thành công.
     if (dateObject.isValid()) {
-      return dateObject.format("MM/DD/YYYY"); // Trả về định dạng MM/DD/YYYY.
+      return dateObject.format("MM/DD/YYYY");
     }
   }
 
   // Trả về null nếu không chuyển đổi được.
   return null;
+}
+
+function timKiemNhanVien() {
+  const input = stringToSlug(document.getElementById("searchBar").value);
+  console.log("🚀 ~ file: index.js:314 ~ timKiemNhanVien ~ input:", input);
+  let ketQuaTimKiem = [];
+
+  for (let i = 0; i < mangNhanVien.length; i++) {
+    if (
+      stringToSlug(mangNhanVien[i].tknv).includes(input) ||
+      stringToSlug(mangNhanVien[i].xepLoai).includes(input) ||
+      stringToSlug(mangNhanVien[i].chucVu).includes(input) ||
+      stringToSlug(mangNhanVien[i].name).includes(input)
+    ) {
+      console.log(
+        "🚀 ~ file: index.js:334 ~ timKiemNhanVien ~ mangNhanVien[i].name:",
+        mangNhanVien[i].name
+      );
+      ketQuaTimKiem.push(mangNhanVien[i]);
+    }
+  }
+
+  return ketQuaTimKiem;
+}
+
+function isSubstringIncluded(str, sub) {
+  return str.includes(sub);
+}
+
+document.getElementById("btnTimNV").onclick = function () {
+  console.log("hello");
+  onlyRenderTable(timKiemNhanVien());
+};
+
+function stringToSlug(title) {
+  slug = "" + title;
+  slug = slug.toLowerCase();
+  slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, "a");
+  slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, "e");
+  slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, "i");
+  slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, "o");
+  slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, "u");
+  slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, "y");
+  slug = slug.replace(/đ/gi, "d");
+  //Xóa các ký tự đặt biệt
+  slug = slug.replace(
+    /\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi,
+    ""
+  );
+  //Đổi khoảng trắng thành ký tự gạch ngang
+  slug = slug.replace(/ /gi, "-");
+  //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+  //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+  slug = slug.replace(/\-\-\-\-\-/gi, "-");
+  slug = slug.replace(/\-\-\-\-/gi, "-");
+  slug = slug.replace(/\-\-\-/gi, "-");
+  slug = slug.replace(/\-\-/gi, "-");
+  //Xóa các ký tự gạch ngang ở đầu và cuối
+  slug = "@" + slug + "@";
+  slug = slug.replace(/\@\-|\-\@|\@/gi, "");
+  return slug;
 }
