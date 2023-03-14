@@ -14,6 +14,22 @@ function validation() {
   return false;
 }
 
+function validationCapNhat() {
+  var valid = true;
+  valid = validationTknvRongVaChieuDai("tknv", "tbTKNV");
+  valid = valid & validationTen("name", "tbTen");
+  valid = valid & validationEmail("email", "tbEmail");
+  valid = valid & validationMatKhau("password", "tbMatKhau");
+  valid = valid & validationLuongCb("luongCB", "tbLuongCB");
+  valid = valid & validationGioLam("gioLam", "tbGiolam");
+  valid = valid & validationNgay("datepicker", "tbNgay");
+
+  if (valid) {
+    return true;
+  }
+  return false;
+}
+
 function kiemTraTknvTonTai(tknv) {
   for (var i = 0; i < mangNhanVien.length; i++) {
     if (tknv === +mangNhanVien[i].tknv) {
@@ -24,8 +40,6 @@ function kiemTraTknvTonTai(tknv) {
   return false;
 }
 
-
-
 function validationTknv(idValue, idTb) {
   var tknv = +document.getElementById(idValue).value;
   console.log("🚀 ~ file: validation.js:29 ~ validationTknv ~ tknv:", tknv);
@@ -35,6 +49,19 @@ function validationTknv(idValue, idTb) {
     return showError(idTb, "Tài khoản nhân viên không được để trống!");
   } else if (kiemTraTknvTonTai(tknv)) {
     return showError(idTb, "Tài khoản nhân viên đã tồn tại!");
+  } else if (tknv.length < 4 || tknv.length > 6) {
+    return showError(idTb, "Tài khoản nhân viên có 4 đến 6 ký tự!");
+  }
+  return true;
+}
+
+function validationTknvRongVaChieuDai(idValue, idTb) {
+  var tknv = +document.getElementById(idValue).value;
+  console.log("🚀 ~ file: validation.js:29 ~ validationTknv ~ tknv:", tknv);
+  document.getElementById(idTb).classList.remove("d-block");
+
+  if (tknv == null || tknv == "") {
+    return showError(idTb, "Tài khoản nhân viên không được để trống!");
   } else if (tknv.length < 4 || tknv.length > 6) {
     return showError(idTb, "Tài khoản nhân viên có 4 đến 6 ký tự!");
   }
